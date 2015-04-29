@@ -4,3 +4,5 @@ include 'counter'
 
 include 'appengine-commons-example'
 
+include 'datastore-callbacks'
+
