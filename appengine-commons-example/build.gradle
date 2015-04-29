@@ -1,0 +1,104 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'war'
+apply plugin: 'appengine'
+
+sourceCompatibility = 1.7
+version = '1.0'
+
+def slim3Version = "1.0.+"
+def appengineVersion = "1.9.18"
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "com.google.appengine:gradle-appengine-plugin:1.9.18"
+    }
+}
+
+idea {
+    module {
+        sourceDirs += file("src/main/java")
+        // slim3
+        sourceDirs += file("build/resources/apt_generated")
+        excludeDirs = [] // Since apt_generated is in /build which is ignored
+    }
+}
+
+// To do hot replace, `gradle assemble`
+appengine {
+    jvmFlags = ["-Dappengine.fullscan.seconds=2"]
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://www.seasar.org/maven/maven2"
+    }
+}
+
+configurations {
+    providedCompile // <scope>provided</scope>
+    aptCompile5
+}
+
+sourceSets {
+    apt_generated
+    main.compileClasspath += configurations.providedCompile
+    test.compileClasspath += configurations.providedCompile
+    test.runtimeClasspath += configurations.providedCompile
+}
+
+dependencies {
+    compile project(":counter")
+
+    compile("org.slim3:slim3:${slim3Version}") {
+        exclude group: "com.google.appengine", module: "appengine-api-1.0-sdk"
+        exclude group: "com.google.appengine", module: "appengine-api-labs"
+    }
+    appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.15'
+    compile "com.google.appengine:appengine-api-1.0-sdk:${appengineVersion}"
+    compile "com.google.appengine:appengine-api-labs:${appengineVersion}"
+    compile "com.google.appengine:appengine-endpoints:${appengineVersion}"
+    compile 'com.google.code.gson:gson:1.7.2'
+    providedCompile "javax.servlet:servlet-api:2.5"
+    aptCompile5("org.slim3:slim3-gen:${slim3Version}") {
+        exclude group: "org.apache.ant", module: "ant"
+    }
+    testCompile "com.google.appengine:appengine-api-stubs:${appengineVersion}"
+    testCompile "com.google.appengine:appengine-testing:${appengineVersion}"
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+// ## slim3 task
+
+// APT for slim3
+// http://int128.hatenablog.com/entry/20120813/1344854664
+task compileAptJava(overwrite: true) << {
+    // 出力先が存在しないとant.aptがエラーになる
+    sourceSets.apt_generated.output.resourcesDir.mkdirs()
+    // ant.aptにfactorypathを直接渡せないのでID渡し
+    ant.path(id: 'aptFactoryPath', location: configurations.aptCompile5.asPath)
+    ant.apt(compile: false,
+            includeAntRuntime: false,
+            factorypathref: 'aptFactoryPath',
+            classpath: configurations.compile.asPath,
+            preprocessdir: sourceSets.apt_generated.output.resourcesDir,
+            encoding: 'UTF-8') {
+        sourceSets.main.java.srcDirs.each{
+            src(path: it)
+        }
+    }
+
+    sourceSets.main.java.srcDirs += sourceSets.apt_generated.output.resourcesDir
+}
+compileJava.dependsOn compileAptJava
+
+test {
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+}

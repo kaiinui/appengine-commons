@@ -1,0 +1,6 @@
+<queue-entries>
+    <queue>
+        <name>ac-counter</name>
+        <mode>pull</mode>
+    </queue>
+</queue-entries>

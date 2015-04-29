@@ -1,0 +1,6 @@
+rootProject.name = 'AppEngineCommons'
+
+include 'counter'
+
+include 'appengine-commons-example'
+
