@@ -1,10 +1,10 @@
 # appengine-commons
 🍣 Common AppEngine Code Snippets
 
-- [Counter](https://github.com/kaiinui/appengine-commons/#Counter)
-- [DatastoreCallbacks](https://github.com/kaiinui/appengine-commons/#DatastoreCallbacks)
-  - [KeyBaseCacheDatastoreCallbacksDelegate](https://github.com/kaiinui/appengine-commons/#KeyBaseCacheDatastoreCallbacksDelegate)
-- [RequestResponseLoggingServletFilter](https://github.com/kaiinui/appengine-commons/#RequestResponseLoggingServletFilter)
+- [Counter](https://github.com/kaiinui/appengine-commons#counter)
+- [DatastoreCallbacks](https://github.com/kaiinui/appengine-commons#datastorecallbacks)
+  - [KeyBaseCacheDatastoreCallbacksDelegate](https://github.com/kaiinui/appengine-commons#keybasecachedatastorecallbacksdelegate)
+- [RequestResponseLoggingServletFilter](https://github.com/kaiinui/appengine-commons#requestresponseloggingservletfilter)
 
 ## Counter
 
