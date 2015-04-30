@@ -6,6 +6,19 @@
   - [KeyBaseCacheDatastoreCallbacksDelegate](https://github.com/kaiinui/appengine-commons#keybasecachedatastorecallbacksdelegate)
 - [RequestResponseLoggingServletFilter](https://github.com/kaiinui/appengine-commons#requestresponseloggingservletfilter)
 
+## Installation
+
+```groovy
+repositories {
+    maven {
+        url  "http://dl.bintray.com/kaiinui/maven"
+    }
+}
+
+compile 'com.kaiinui.appengine-commons:counter:0.1.0'
+compile 'com.kaiinui.appengine-commons:datastore-callbacks:0.1.0'
+```
+
 ## Counter
 
 * An incremental counter implementation, which is Datastore write cost friendly.

@@ -38,6 +38,9 @@ repositories {
     maven {
         url "https://www.seasar.org/maven/maven2"
     }
+    maven {
+        url  "http://dl.bintray.com/kaiinui/maven"
+    }
 }
 
 configurations {
@@ -53,7 +56,8 @@ sourceSets {
 }
 
 dependencies {
-    compile project(":counter")
+    compile 'com.kaiinui.appengine-commons:counter:0.1.0'
+    compile 'com.kaiinui.appengine-commons:datastore-callbacks:0.1.0'
     compile project(":logger-filter")
 
     compile("org.slim3:slim3:${slim3Version}") {
