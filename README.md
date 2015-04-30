@@ -1,4 +1,9 @@
 # appengine-commons
+
+- Counter: [ ![Download](https://api.bintray.com/packages/kaiinui/maven/appengine-commons.counter/images/download.svg) ](https://bintray.com/kaiinui/maven/appengine-commons.counter/_latestVersion)
+- DatastoreCallbacks: [ ![Download](https://api.bintray.com/packages/kaiinui/maven/appengine-commons.datastore-callbacks/images/download.svg) ](https://bintray.com/kaiinui/maven/appengine-commons.datastore-callbacks/_latestVersion)
+
+
 🍣 Common AppEngine Code Snippets
 
 - [Counter](https://github.com/kaiinui/appengine-commons#counter)
