@@ -13,6 +13,6 @@ public class Counter {
         final TaskOptions options = TaskOptions.Builder.withMethod(TaskOptions.Method.PULL)
                 .tag(key);
         QueueFactory.getQueue(COUNTER_PULL_QUEUE_NAME)
-                .add(options);
+                .addAsync(options);
     }
 }
