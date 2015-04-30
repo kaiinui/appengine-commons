@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <!-- Logging -->
+    <filter>
+        <filter-name>LogFilter</filter-name>
+        <filter-class>appengine_commons.example.LoggingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LogFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <!-- Slim3 -->
     <context-param>
         <param-name>slim3.rootPackage</param-name>
@@ -23,7 +33,7 @@
         <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
         <init-param>
             <param-name>services</param-name>
-            <param-value>co.kotori.scorpion.ScorpionApi</param-value>
+            <param-value>appengine_commons.example.Api</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

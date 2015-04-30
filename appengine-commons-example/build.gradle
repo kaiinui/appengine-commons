@@ -54,6 +54,7 @@ sourceSets {
 
 dependencies {
     compile project(":counter")
+    compile project(":logger-filter")
 
     compile("org.slim3:slim3:${slim3Version}") {
         exclude group: "com.google.appengine", module: "appengine-api-1.0-sdk"

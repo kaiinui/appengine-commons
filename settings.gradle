@@ -6,3 +6,5 @@ include 'appengine-commons-example'
 
 include 'datastore-callbacks'
 
+include 'logger-filter'
+
