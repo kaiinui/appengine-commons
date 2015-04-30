@@ -1,6 +1,11 @@
 # appengine-commons
 🍣 Common AppEngine Code Snippets
 
+- [Counter](https://github.com/kaiinui/appengine-commons/#Counter)
+- [DatastoreCallbacks](https://github.com/kaiinui/appengine-commons/#DatastoreCallbacks)
+  - [KeyBaseCacheDatastoreCallbacksDelegate](https://github.com/kaiinui/appengine-commons/#KeyBaseCacheDatastoreCallbacksDelegate)
+- [RequestResponseLoggingServletFilter](https://github.com/kaiinui/appengine-commons/#RequestResponseLoggingServletFilter)
+
 ## Counter
 
 * An incremental counter implementation, which is Datastore write cost friendly.
