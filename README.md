@@ -2,14 +2,18 @@
 
 - Counter: [ ![Download](https://api.bintray.com/packages/kaiinui/maven/appengine-commons.counter/images/download.svg) ](https://bintray.com/kaiinui/maven/appengine-commons.counter/_latestVersion)
 - DatastoreCallbacks: [ ![Download](https://api.bintray.com/packages/kaiinui/maven/appengine-commons.datastore-callbacks/images/download.svg) ](https://bintray.com/kaiinui/maven/appengine-commons.datastore-callbacks/_latestVersion)
+- EventLogger: [ ![Download](https://api.bintray.com/packages/kaiinui/maven/appengine-commons.event-logger/images/download.svg) ](https://bintray.com/kaiinui/maven/appengine-commons.event-logger/_latestVersion)
 
 
 🍣 Common AppEngine Code Snippets
 
-- [Counter](https://github.com/kaiinui/appengine-commons#counter)
+- [Counter](https://github.com/kaiinui/appengine-commons#counter) an efficient incremental counter
 - [DatastoreCallbacks](https://github.com/kaiinui/appengine-commons#datastorecallbacks)
-  - [KeyBaseCacheDatastoreCallbacksDelegate](https://github.com/kaiinui/appengine-commons#keybasecachedatastorecallbacksdelegate)
-- [RequestResponseLoggingServletFilter](https://github.com/kaiinui/appengine-commons#requestresponseloggingservletfilter)
+  - [KeyBaseCacheDatastoreCallbacksDelegate](https://github.com/kaiinui/appengine-commons#keybasecachedatastorecallbacksdelegate) automatically caches entities with key-base strategy
+- [EventLogger](https://github.com/kaiinui/appengine-commons#eventlogger) buffers and flushes structured data to BigQuery
+- EntityEvent entity mutation events like Rails's `after_create`
+- Repository repository base class that implements basic methods
+- [RequestResponseLoggingServletFilter](https://github.com/kaiinui/appengine-commons#requestresponseloggingservletfilter) logs request and response payload
 
 ## Installation
 
@@ -22,6 +26,7 @@ repositories {
 
 compile 'com.kaiinui.appengine-commons:counter:0.1.0'
 compile 'com.kaiinui.appengine-commons:datastore-callbacks:0.1.0'
+compile 'com.kaiinui.appengine-commons:event-logger:0.0.1'
 ```
 
 ## Counter
@@ -79,6 +84,25 @@ public class KeyBaseCacheDatastoreCallbacks {
     public void onPreGet(PreGetContext preGetContext) {
         KeyBaseCacheDatastoreCallbacksDelegate.getFromCacheIfHitsOnPreGet(preGetContext);
     }
+}
+```
+
+## EventLogger
+
+* It buffers and flushes events with structured format. You can flushes them to BigQuery, Datastore, etc...
+* It does not blocks the thread, does not perform any datastore operations, neither any heavy operations.
+* Internally, it buffers events to PullQueue, Cron Job flushes them to BigQuery or Datastore.
+
+```java
+Events.withTag("view")
+    .param("path", "photos/23434")
+    .publish();
+```
+
+```java
+// cron job
+public void doGet(HttpServletRequest request, HttpServletResponse response) {
+    WriteEventPullTaskDelegate.flushEvents(new DatastoreEventFlusher());
 }
 ```
 
