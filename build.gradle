@@ -29,5 +29,9 @@ subprojects {
         archives sourcesJar
         archives javadocJar
     }
+
+    javadoc {
+        options.locale = 'en_US'
+    }
 }
 

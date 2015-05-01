@@ -3,4 +3,8 @@
         <name>ac-counter</name>
         <mode>pull</mode>
     </queue>
+    <queue>
+        <name>ac-events</name>
+        <mode>pull</mode>
+    </queue>
 </queue-entries>

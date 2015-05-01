@@ -59,6 +59,7 @@ dependencies {
     compile 'com.kaiinui.appengine-commons:counter:0.1.0'
     compile 'com.kaiinui.appengine-commons:datastore-callbacks:0.1.0'
     compile project(":logger-filter")
+    compile project(":event-logger")
 
     compile("org.slim3:slim3:${slim3Version}") {
         exclude group: "com.google.appengine", module: "appengine-api-1.0-sdk"
