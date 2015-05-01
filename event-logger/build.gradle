@@ -17,6 +17,16 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository url: "file://${buildDir}/repository"
+            pom.version = '0.0.1'
+            pom.groupId = 'com.kaiinui.appengine-commons'
+            pom.artifactId = 'event-logger'
+        }
+    }
+}
 
 javadoc {
     options.locale = 'en_US'
