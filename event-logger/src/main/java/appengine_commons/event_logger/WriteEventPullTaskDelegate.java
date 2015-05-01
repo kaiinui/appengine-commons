@@ -12,10 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Created by kaiinui on 2015/05/02.
+ * A class provides a static method that handles event flushing cron job.
+ *
+ * With following code, you can flushes the events buffered in pull-queue.
+ *
+ * <pre><code>
+ *     // cron-job-targeted servlet
+ *     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+ *         WriteEventPullTaskDelegate.flushEvents(new DatastoreEventFlusher());
+ *     }
+ * </code></pre>
+ *
+ * To publish events, refer {@link appengine_commons.event_logger.Events}.
  */
 public class WriteEventPullTaskDelegate {
     static final int MAX_FETCH_SIZE = 1000;
