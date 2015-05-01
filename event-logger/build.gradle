@@ -1,0 +1,23 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.5
+version = '1.0'
+
+def appengineVersion = '1.9.19'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "com.google.appengine:appengine-api-1.0-sdk:${appengineVersion}"
+    compile "com.google.appengine:appengine-api-labs:${appengineVersion}"
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+
+javadoc {
+    options.locale = 'en_US'
+}

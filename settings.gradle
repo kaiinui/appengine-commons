@@ -8,3 +8,5 @@ include 'datastore-callbacks'
 
 include 'logger-filter'
 
+include 'event-logger'
+
